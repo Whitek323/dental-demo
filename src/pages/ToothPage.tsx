@@ -8,7 +8,7 @@ export default class ToothPage extends Component {
                     <iframe
   className="w-100 h-100"
   title="tooth"
-  src="https://fc98-2001-44c8-4484-8980-702c-41b3-f3c0-b5f4.ngrok-free.app/?editorid=804"
+  src="https://needle-face-filter-examples-1ghivqzlfhy3-zlfhy3.needle.run/?"
   allow="camera; microphone"
   allowFullScreen>
 </iframe>
