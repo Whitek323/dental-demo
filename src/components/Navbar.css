@@ -50,3 +50,7 @@
 .nav-item:active .nav-link {
     color: #ff9900; /* Change color on active */
 }
+
+.brush-icon{
+    filter: "invert(1)"
+}

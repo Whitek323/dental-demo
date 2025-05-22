@@ -18,7 +18,7 @@ export default function Navbar() {
 
                     <span className="nav-item">
                         <div className="icon-container">
-                             <img src={brushTeethIcon} alt="Brush Teeth" width={25} height={25} style={{ filter: "invert(1)" }}/>
+                             <img className="brush-icon" src={brushTeethIcon} alt="Brush Teeth" width={25} height={25}/>
                         </div>
                         <a className="nav-link" href="/tooth">Brush teeth</a>
                     </span>
