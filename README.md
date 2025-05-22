@@ -52,3 +52,8 @@ export default tseslint.config({
   },
 })
 ```
+```
+  cd dental-demo
+  npm install
+  npm run dev
+```
