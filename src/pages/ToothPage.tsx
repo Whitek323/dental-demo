@@ -8,7 +8,7 @@ export default class ToothPage extends Component {
                     <iframe
   className="w-100 h-100"
   title="tooth"
-  src="https://needle-face-filter-examples-1ghivqzlfhy3-zlfhy3.needle.run/?"
+  src="https://192.168.231.127:3000/"
   allow="camera; microphone"
   allowFullScreen>
 </iframe>
