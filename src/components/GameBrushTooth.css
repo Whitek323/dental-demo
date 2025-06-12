@@ -5,7 +5,7 @@
   border-radius: 50%;
   border: 10px solid rgb(0, 153, 255);
   pointer-events: none;
-  /* animation: pulse 1s infinite; */
+  animation: pulse 1s infinite;
   z-index: 10;
 }
 

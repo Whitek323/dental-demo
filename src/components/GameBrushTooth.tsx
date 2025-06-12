@@ -69,8 +69,9 @@ export default function GameBrushTooth() {
             if (showCircle && circleRef.current) {
               const x = nose.x * canvas.width;
               const y = nose.y * canvas.height;
-              circleRef.current.style.left = `${x - 75}px`;
-              circleRef.current.style.top = `${y - 75}px`;
+              const circleSize = 350;
+              circleRef.current.style.left = `${x - circleSize / 2}px`;
+              circleRef.current.style.top = `${y - circleSize / 2}px`;
               circleRef.current.style.display = 'block';
             } else if (circleRef.current) {
               circleRef.current.style.display = 'none';
