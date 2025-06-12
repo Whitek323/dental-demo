@@ -3,7 +3,8 @@ import { Component } from 'react'
 export default class DashboardPage extends Component {
   render() {
     return (
-      <div>Dashboard</div>
+      // <div className='text-center'>Dashboard</div>
+      <div></div>
     )
   }
 }
