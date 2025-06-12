@@ -1,0 +1,44 @@
+
+.panel-heading {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #222;
+}
+
+.detector-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.output3 {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.loading {
+  margin-top: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0,0,0,.1);
+  border-left-color: #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .output3 {
+    width: 90vw;
+  }
+}

@@ -7,7 +7,7 @@ import './Navbar.css';
 export default function Navbar() {
     return (
         <>
-            <nav className="navbar fixed-bottom text-white bg-info-subtle custom-nav" data-bs-theme="dark">
+            <nav className="d-none navbar fixed-bottom text-white bg-info-subtle custom-nav" data-bs-theme="dark">
                 <div className="container-fluid">
                     <span className="nav-item">
                         <a className="nav-link" href="/dashboard">
