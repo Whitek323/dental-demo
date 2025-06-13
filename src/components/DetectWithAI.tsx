@@ -61,7 +61,7 @@ export default function DetectWithAI({ videoElement, onTrigger }: Props) {
                 setTopLabel(`${top.className}: ${top.probability.toFixed(2)}`);
 
                 if (onTrigger) {
-                    onTrigger(top.index === 1 && top.probability > 0.5);
+                    onTrigger(top.index === 1);
                 }
 
                 requestAnimationFrame(predictLoop);
@@ -81,7 +81,7 @@ export default function DetectWithAI({ videoElement, onTrigger }: Props) {
     }, [videoElement]);
 
     return (
-        <div className="text-center mt-2 text-primary fw-bold">
+        <div className="text-center mt-2 text-primary fw-bold z-3">
             {topLabel}
         </div>
     );

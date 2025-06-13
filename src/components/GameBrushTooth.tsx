@@ -164,7 +164,7 @@ export default function GameBrushTooth() {
  <DetectWithAI
   videoElement={videoRef.current} 
   onTrigger={(state) => {
-    // console.log('🔔 TRIGGER:', state);
+    // console.log('🔔 TRIGGER:', state); 
     setShowCircle(state);
   }} 
 />
