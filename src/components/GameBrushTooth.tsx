@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './GameBrushTooth.css';
+import DetectWithAI from './DetectWithAI';
 
 declare global {
   interface Window {
@@ -23,6 +24,8 @@ declare global {
 
 export default function GameBrushTooth() {
   const [showCircle, setShowCircle] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
@@ -56,6 +59,10 @@ export default function GameBrushTooth() {
       const controls = controlRef.current!;
       const ctx = canvas.getContext('2d')!;
       const fpsControl = new window.FPS();
+      video.onloadedmetadata = () => {
+        setIsVideoReady(true); // กล้องโหลดพร้อมแล้ว
+      };
+
 
       const onResults = (results: any) => {
         document.body.classList.add('loaded');
@@ -140,25 +147,39 @@ export default function GameBrushTooth() {
   return (
     <div className="container position-relative mt-4">
       <div className="text-center mb-3">
-        <h4>🪥 พิมพ์ 0 หรือ 1 เพื่อควบคุมวงกลม</h4>
+        {/* <h4>🪥 พิมพ์ 0 หรือ 1 เพื่อควบคุมวงกลม</h4>
         <input
           ref={inputRef}
           type="text"
           className="form-control w-50 mx-auto"
           placeholder="0 = ปิด, 1 = แสดง"
-        />
+        /> */}
       </div>
 
-      <div className="position-relative text-center">
-        <video ref={videoRef} className="input_video2 d-none" autoPlay muted playsInline />
-        <canvas ref={canvasRef} className="output2 w-100" width={480} height={480} />
-        <div ref={circleRef} className="shield-layer" />
-      </div>
+    <div className="position-relative text-center overflow-hidden" style={{ maxWidth: 480, margin: '0 auto' }}>
+      <video ref={videoRef} className="d-none" autoPlay muted playsInline />
+      <canvas ref={canvasRef} className="w-100" width={480} height={480} />
+      <div ref={circleRef} className="shield-layer" />
+{videoRef.current && videoRef.current && (
+ <DetectWithAI
+  videoElement={videoRef.current} 
+  onTrigger={(state) => {
+    // console.log('🔔 TRIGGER:', state);
+    setShowCircle(state);
+  }} 
+/>
+
+)}
+
+
+    </div>
+
 
       <div className="loading text-center my-2">
-        <div className="spinner-border" role="status" />
+
+        {/* <div className="spinner-border" role="status" /> */}
       </div>
       <div ref={controlRef} style={{ visibility: 'hidden' }} />
-    </div>
+    </div> 
   );
 }

@@ -31,7 +31,7 @@ export default function FaceDetector() {
         'https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js',
         'https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js',
         'https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js',
-        'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.1/face_mesh.js',
+        'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4/face_mesh.js',
       ];
       for (const src of srcs) {
         await new Promise<void>((res) => {
