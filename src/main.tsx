@@ -14,6 +14,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import App from './game/App.tsx';
 import DisplayMain from './pages/DisplayMain.tsx';
 import GameBrushTooth from './components/GameBrushTooth.tsx';
+import OldApp from './game/OldApp.tsx';
 const router = createBrowserRouter([
   {
     path:'/',
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path:'/gameBrushTooth',
     element:<GameBrushTooth/>
+  },
+  {
+    path:'/gameOld',
+    element:<OldApp/>
   }
 ])
 createRoot(document.getElementById('root')!).render(

@@ -51,7 +51,29 @@ const App: React.FC = () => {
   const gameInterval = useRef<number | null>(null);
   const animationRef = useRef<number>();
   const bacteriaList = useRef<Bacteria[]>([]);
+  const currentStack = useRef<number>(0);
   const spawnCounter = useRef<number>(0);
+  useEffect(() => {
+    currentStack.current = stack;
+  }, [stack]);
+    useEffect(() => {
+    if (running && !paused) {
+      if (gameInterval.current) clearInterval(gameInterval.current);
+      gameInterval.current = window.setInterval(() => {
+        setTotalTime(prev => prev + 1);
+      }, 1000);
+    }
+    return () => {
+      if (gameInterval.current) clearInterval(gameInterval.current);
+    };
+  }, [running, paused]);
+
+  useEffect(() => {
+    const currentPhase = Math.min(Math.floor(totalTime / PHASE_DURATION), TOTAL_PHASES - 1);
+    setPhase(currentPhase);
+    setBrushingTime(PHASE_DURATION - (totalTime % PHASE_DURATION));
+    if (totalTime >= MAX_TIME) endGame();
+  }, [totalTime]);
 
   useEffect(() => {
     const animate = () => {
@@ -59,7 +81,7 @@ const App: React.FC = () => {
         const shieldRect = shieldRef.current?.getBoundingClientRect();
         const faceRect = faceRef.current?.getBoundingClientRect();
 
-        if (spawnCounter.current++ % 90 === 0) spawnBacteria();
+        if (spawnCounter.current++ % 90 === 0 && totalTime!=0) spawnBacteria();
 
         bacteriaList.current.forEach((bacteria, index) => {
           bacteria.x += bacteria.vx;
@@ -194,11 +216,21 @@ const App: React.FC = () => {
     return !(r1.right < r2.left || r1.left > r2.right || r1.bottom < r2.top || r1.top > r2.bottom);
   };
 
-  const startGame = () => { if (!running) setRunning(true); setPaused(false); };
+  const startGame = () => { 
+    if (running) return;
+    console.log("UIIA UIIA I")
+    setRunning(true); 
+    setPaused(false); 
+  };
   const togglePause = () => setPaused(p => !p);
   const restartGame = () => {
-    setTotalTime(0); setBrushingTime(PHASE_DURATION); setScore(0); setStack(0);
-    setPaused(false); setRunning(false); setEnd(false);
+    setTotalTime(0); 
+    setBrushingTime(PHASE_DURATION); 
+    setScore(0); 
+    setStack(0);
+    setPaused(false); 
+    setRunning(false); 
+    setEnd(false);
     bacteriaList.current.forEach(b => b.el.remove());
     bacteriaList.current = [];
   };
@@ -213,7 +245,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <div id="game" ref={gameRef} className="position-relative d-flex justify-content-center align-items-center">
+      <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center">
         <video ref={videoRef} className="position-absolute d-none" autoPlay muted playsInline />
         <canvas ref={canvasRef} width={480} height={480} className="position-absolute" style={{ zIndex: 1 }} />
         <div ref={shieldRef} className="shield-layer position-absolute rounded-circle" style={{ display: showShield ? 'block' : 'none', zIndex: 2 }} />
@@ -222,7 +254,13 @@ const App: React.FC = () => {
         <DetectWithAI videoElement={videoRef.current} onTrigger={setShowShield} />
         <HUD totalTime={totalTime} brushingTime={brushingTime} phase={phase} score={score} stack={stack} />
         {end && <EndScreen score={score} totalTime={totalTime} rating={rating} onRestart={restartGame} />}
-        <Controls paused={paused} stack={stack} onStart={startGame} onPauseToggle={togglePause} onStackChange={setStack} />
+        <Controls
+          paused={paused}
+          stack={stack}
+          onStart={startGame}
+          onPauseToggle={togglePause}
+          onStackChange={setStack} 
+        />
       </div>
     </div>
   );

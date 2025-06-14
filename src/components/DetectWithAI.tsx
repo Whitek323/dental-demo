@@ -61,7 +61,7 @@ export default function DetectWithAI({ videoElement, onTrigger }: Props) {
                 setTopLabel(`${top.className}: ${top.probability.toFixed(2)}`);
 
                 if (onTrigger) {
-                    onTrigger(top.index === 1);
+                    onTrigger(top.index === 2);
                 }
 
                 requestAnimationFrame(predictLoop);

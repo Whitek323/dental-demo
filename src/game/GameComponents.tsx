@@ -61,10 +61,17 @@ export const Controls: React.FC<{
   onPauseToggle: () => void;
   onStackChange: (v: number) => void;
 }> = ({ paused, stack, onStart, onPauseToggle, onStackChange }) => (
-  <div id="controls">
-    <button className='btn btn-primary' onClick={onStart}>เริ่ม</button>
+
+<div className="fixed-bottom bottom-0 d-flex justify-content-center align-items-center gap-3 mt-5" style={{ zIndex: 99 }}>
+<button 
+  style={{ display: HUD.totalTime === 0 ? "none" : "block" }} 
+  className="btn btn-primary z-3" 
+  onClick={onStart}
+>
+  เริ่ม
+</button>
     <button className='btn btn-danger' onClick={onPauseToggle}>{paused ? 'Resume' : 'Pause'}</button>
-    <input
+    {/* <input
       type="number"
       // className='form-control'
       min={0}
@@ -73,7 +80,7 @@ export const Controls: React.FC<{
       onChange={(e) => onStackChange(Math.max(0, Math.min(3, parseInt(e.target.value))))}
       style={{ width: '60px' }}
       aria-label="ตั้งค่าเกราะ"
-    />
+    /> */}
     
   </div>
 );
