@@ -65,7 +65,7 @@ export const Controls: React.FC<{
 <div className="fixed-bottom bottom-0 d-flex justify-content-center align-items-center gap-3 mt-5" style={{ zIndex: 99 }}>
 <button 
   style={{ display: HUD.totalTime === 0 ? "none" : "block" }} 
-  className="btn btn-primary z-3" 
+  className="btn btn-primary z-3"
   onClick={onStart}
 >
   เริ่ม
