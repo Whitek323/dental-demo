@@ -6,19 +6,24 @@ import {
   RouterProvider,
 } from "react-router";
 import SettingsPage from './pages/SettingsPage.tsx';
-import Navbar from './components/Navbar.tsx';
 import ToothPage from './pages/ToothPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import App from './game/App.tsx';
+import App from './game/Game.tsx';
 import DisplayMain from './pages/DisplayMain.tsx';
 import GameBrushTooth from './components/GameBrushTooth.tsx';
 import OldApp from './game/OldApp.tsx';
+import HomePage from './pages/HomePage.tsx';
+import MenuPage from './pages/MenuPage.tsx';
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<DashboardPage/>
+    element:<HomePage/>
+  },
+  {
+    path:'/menu',
+    element:<MenuPage/>
   },
   {
     path:'/tooth',
@@ -51,7 +56,6 @@ const router = createBrowserRouter([
 ])
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Navbar/>
     <RouterProvider router={router}/>
   </StrictMode>,
 )
