@@ -245,9 +245,9 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center">
+      <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center vh-100 align-items-center">
         <video ref={videoRef} className="position-absolute d-none" autoPlay muted playsInline />
-        <canvas ref={canvasRef} width={480} height={480} className="position-absolute" style={{ zIndex: 1 }} />
+        <canvas ref={canvasRef} width={480} height={480} className="position-absolute m-auto" style={{ zIndex: 1 }} />
         <div ref={shieldRef} className="shield-layer position-absolute rounded-circle" style={{ display: showShield ? 'block' : 'none', zIndex: 2 }} />
         <div ref={faceRef} className="position-absolute" style={{ width: 1, height: 1, zIndex: 0 }} />
 

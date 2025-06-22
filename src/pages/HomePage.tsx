@@ -3,8 +3,8 @@ import "./HomePage.css";
 import ImageWithFallback from '../components/ImageWithFallback';
 import user_example from '../constant';
 
+console.log(user_example)
 export default class HomePage extends Component {
-
   render() {
     return (
       <section>
@@ -12,15 +12,9 @@ export default class HomePage extends Component {
         <ImageWithFallback srcBase={`theme/${user_example.theme}/banner`} alt="banner" width={300} />
 
         <div className="d-flex flex-column gap-3">
-          <a href="/game" className="btn-img">
-            <ImageWithFallback srcBase={`theme/${user_example.theme}/btn-start`} alt="btn-start" width={300} />
-          </a>
-          <a href="/game" className="btn-img">
-            <ImageWithFallback srcBase={`theme/${user_example.theme}/btn-ranking`} alt="btn-ranking" width={300} />
-          </a>
-          <a href="/game" className="btn-img mb-3">
-            <ImageWithFallback srcBase={`theme/${user_example.theme}/btn-exit`} alt="btn-exit" width={300} />
-          </a>
+            <ImageWithFallback className='btn-img' navLink='/menu' srcBase={`theme/${user_example.theme}/btn-start`} alt="btn-start"/>
+            <ImageWithFallback className='btn-img' navLink='/game' srcBase={`theme/${user_example.theme}/btn-ranking`} alt="btn-ranking"/>
+            <ImageWithFallback className='btn-img' navLink='/menu' srcBase={`theme/${user_example.theme}/btn-exit`} alt="btn-exit"/>
         </div>
       </section>
     );

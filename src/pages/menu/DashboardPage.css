@@ -1,0 +1,48 @@
+.dashboardBox1{
+    border:1px solid white;
+    width: 100%;
+    background: #2A7B9B;
+    background: linear-gradient(90deg, rgba(42, 123, 155, 0.75) 0%, rgba(87, 199, 133, 0.75) 100%);
+}
+.dashboardBox2{
+    border:1px solid white;
+    width: 100%;
+    background: #5d2a9b;
+    background: linear-gradient(90deg, rgba(93, 42, 155, 0.75) 0%, rgba(199, 87, 162, 0.75) 100%);
+}
+.dashboardBox3{
+    border:1px solid white;
+    width: 100%;
+    background: #9b2a2a;
+    background: linear-gradient(90deg, rgba(155, 42, 42, 0.75) 0%, rgba(199, 193, 87, 0.75) 100%);
+}
+
+.dashboardBox4{
+    border:1px solid white;
+    width: 100%;
+    background: #2a309b;
+    background: linear-gradient(90deg, rgba(42, 48, 155, 0.75) 0%, rgba(87, 199, 199, 0.75) 100%);
+}
+
+.dashboardBox1 * {
+  color: white !important;
+  font-weight: 700;
+}
+.dashboardBox2 * {
+  color: white !important;
+  font-weight: 700;
+}
+.dashboardBox3 * {
+  color: white !important;
+  font-weight: 700;
+}
+.dashboardBox3 svg text {
+  fill: white !important;
+  font-weight: 700;
+}
+
+
+.dashboardBox4 * {
+  color: white !important;
+  font-weight: 700;
+}

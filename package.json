@@ -21,6 +21,7 @@
     "@mediapipe/hands": "^0.4.1675469240",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@mui/x-charts": "^8.5.3",
     "bootstrap": "^5.3.6",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
