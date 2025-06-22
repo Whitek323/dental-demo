@@ -1,13 +1,13 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import brushTeethIcon from "../assets/icon/toothbrush.png";
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import './Menubar.css';
 
-import './Navbar.css';
-
-export default function Navbar() {
+export default function Menubar() {
     return (
         <>
-            <nav className="d-none navbar fixed-bottom text-white bg-info-subtle custom-nav" data-bs-theme="dark">
+            <nav className="navbar fixed-bottom text-white custom-nav" style={{backgroundColor:"#9000ff"}}>
                 <div className="container-fluid">
                     <span className="nav-item">
                         <a className="nav-link" href="/dashboard">
@@ -20,9 +20,10 @@ export default function Navbar() {
                     <span className="nav-item">
                         <a className="nav-link" href="/tooth">
                         <div className="icon-container text-center">
-                             <img className="brush-icon" style={{filter: "invert(1)"}} src={brushTeethIcon} alt="Brush Teeth" width={25} height={25}/>
+                          {/* <img className="brush-icon" style={{filter: "invert(1)"}} src={brushTeethIcon} alt="Brush Teeth" width={25} height={25}/> */}
+                          <SportsEsportsIcon/>
                         </div>
-                        Brush teeth</a>
+                        Play Game</a>
                     </span>
 
                     <span className="nav-item">

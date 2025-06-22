@@ -1,0 +1,7 @@
+.game-card{
+    border: 8px solid white;
+    margin: 5px;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 2rem;
+}

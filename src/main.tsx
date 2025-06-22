@@ -1,61 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router";
-import SettingsPage from './pages/SettingsPage.tsx';
-import ToothPage from './pages/ToothPage.tsx';
-import DashboardPage from './pages/DashboardPage.tsx';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import App from './game/Game.tsx';
-import DisplayMain from './pages/DisplayMain.tsx';
-import GameBrushTooth from './components/GameBrushTooth.tsx';
-import OldApp from './game/OldApp.tsx';
-import HomePage from './pages/HomePage.tsx';
-import MenuPage from './pages/MenuPage.tsx';
-const router = createBrowserRouter([
-  {
-    path:'/',
-    element:<HomePage/>
-  },
-  {
-    path:'/menu',
-    element:<MenuPage/>
-  },
-  {
-    path:'/tooth',
-    element:<ToothPage/>
-  },
-  {
-    path:'/dashboard',
-    element:<DashboardPage/>
-  },
-  {
-    path:'/settings',
-    element:<SettingsPage/>
-  },
-  {
-    path:'/game',
-    element:<App/>
-  },
-  {
-    path:'/hand',
-    element:<DisplayMain/> 
-  },
-  {
-    path:'/gameBrushTooth',
-    element:<GameBrushTooth/>
-  },
-  {
-    path:'/gameOld',
-    element:<OldApp/>
-  }
-])
+import ThemeApp from './ThemeApp';
+import Layout from './layout/Layout';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <ThemeApp>
+      <Layout/>
+    </ThemeApp>
   </StrictMode>,
 )
