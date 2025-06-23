@@ -4,7 +4,7 @@ class UserExample {
     user_id:number =1;
     fname_th: string = "กิตติกร";
     lname_th: string = "อุณหกานต์";
-    theme: string = "ninja";
+    theme: string = "default";
 }
 class TrnBrushing{
     public user_id:number;

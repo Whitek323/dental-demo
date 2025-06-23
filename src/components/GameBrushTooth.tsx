@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './GameBrushTooth.css';
-import DetectWithAI from './DetectWithAI';
+import DetectWithAI from '../game/bacteria/DetectWithAI';
 
 declare global {
   interface Window {

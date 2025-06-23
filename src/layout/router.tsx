@@ -1,10 +1,9 @@
 import SettingsPage from '../pages/SettingsPage.tsx';
 import ToothPage from '../pages/ToothPage.tsx';
 import DashboardPage from '../pages/menu/DashboardPage.tsx';
-import App from '../game/Game.tsx';
+import BacteriaDefender from '../game/bacteria/BacteriaDefender.tsx';
 import DisplayMain from '../pages/DisplayMain.tsx';
 import GameBrushTooth from '../components/GameBrushTooth.tsx';
-import OldApp from '../game/OldApp.tsx';
 import HomePage from '../pages/HomePage.tsx';
 import MenuPage from '../pages/menu/MenuPage.tsx';
 import {
@@ -32,8 +31,8 @@ const router = createBrowserRouter([
     element:<SettingsPage/>
   },
   {
-    path:'/game',
-    element:<App/>
+    path:'/bacteriadefender',
+    element:<BacteriaDefender/>
   },
   {
     path:'/hand',
@@ -43,10 +42,6 @@ const router = createBrowserRouter([
     path:'/gameBrushTooth',
     element:<GameBrushTooth/>
   },
-  {
-    path:'/gameOld',
-    element:<OldApp/>
-  }
 ])
 
 export default router

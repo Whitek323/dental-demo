@@ -6,8 +6,8 @@ import {
   HUD,
   Controls,
   EndScreen
-} from './bacteria/GameComponents';
-import DetectWithAI from './bacteria/DetectWithAI';
+} from './GameComponents';
+import DetectWithAI from './DetectWithAI';
 
 const MAX_TIME = 120;
 const PHASE_DURATION = 20;
@@ -30,7 +30,7 @@ interface Bacteria {
   vy: number;
 }
 
-const App: React.FC = () => {
+const BacteriaDefender: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -266,4 +266,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default BacteriaDefender;
