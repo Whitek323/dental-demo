@@ -1,4 +1,3 @@
-// ✅ ปรับ App.tsx ให้ตรวจจับใบหน้าแยกจากโล่วงกลม (shield) จริง ๆ
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import {
@@ -81,7 +80,7 @@ const BacteriaDefender: React.FC = () => {
         const shieldRect = shieldRef.current?.getBoundingClientRect();
         const faceRect = faceRef.current?.getBoundingClientRect();
 
-        if (spawnCounter.current++ % 90 === 0 && totalTime!=0) spawnBacteria();
+        if (spawnCounter.current++ % 90 === 0 && totalTime>0) spawnBacteria();
 
         bacteriaList.current.forEach((bacteria, index) => {
           bacteria.x += bacteria.vx;
@@ -108,7 +107,7 @@ const BacteriaDefender: React.FC = () => {
     };
     animationRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationRef.current!);
-  }, [paused, showShield]);
+  }, [paused, showShield, running, totalTime]);
 
   useEffect(() => {
     const load = async () => {
@@ -149,8 +148,14 @@ const BacteriaDefender: React.FC = () => {
       if (results.multiFaceLandmarks) {
         for (const landmarks of results.multiFaceLandmarks) {
           const nose = landmarks[1];
-          const x = nose.x * canvas.width;
-          const y = nose.y * canvas.height;
+          const canvasEl = canvasRef.current!;
+          const gameRect = gameRef.current!.getBoundingClientRect();
+          const canvasOffset = canvasEl.getBoundingClientRect();
+
+          const x = nose.x * canvasEl.width + (canvasOffset.left - gameRect.left);
+          const y = nose.y * canvasEl.height + (canvasOffset.top - gameRect.top);
+
+
           const size = 300;
           if (shieldRef.current) {
             shieldRef.current.style.left = `${x - size / 2}px`;
@@ -179,6 +184,7 @@ const BacteriaDefender: React.FC = () => {
 
   const spawnBacteria = () => {
     if (!gameRef.current) return;
+    
     const gameW = gameRef.current.clientWidth;
     const gameH = gameRef.current.clientHeight;
     const canvas = canvasRef.current!;
@@ -187,8 +193,10 @@ const BacteriaDefender: React.FC = () => {
     const targetY = canvasRect.top + canvasRect.height / 2;
 
     const el = document.createElement('img');
-    const enemies = [`game/bacteria/${phase + 1}.png`];
-    if (phase === 5) enemies.push('game/bacteria/boss6.png');
+    el.onload = () => gameRef.current!.appendChild(el); // ปลอดภัยกว่า
+
+    const enemies = [`theme/default/enemy/${phase + 1}.png`];
+    // if (phase === 5) enemies.push('game/bacteria/boss6.png');
     el.src = enemies[Math.floor(Math.random() * enemies.length)];
     el.className = 'bacteria';
     gameRef.current.appendChild(el);
@@ -247,7 +255,7 @@ const BacteriaDefender: React.FC = () => {
     <div>
       <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center vh-100 align-items-center">
         <video ref={videoRef} className="position-absolute d-none" autoPlay muted playsInline />
-        <canvas ref={canvasRef} width={480} height={480} className="position-absolute m-auto" style={{ zIndex: 1 }} />
+        <canvas ref={canvasRef} width={480} height={480} className="position-absolute m-auto rounded-4" style={{ zIndex: 1 }} />
         <div ref={shieldRef} className="shield-layer position-absolute rounded-circle" style={{ display: showShield ? 'block' : 'none', zIndex: 2 }} />
         <div ref={faceRef} className="position-absolute" style={{ width: 1, height: 1, zIndex: 0 }} />
 

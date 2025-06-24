@@ -20,6 +20,7 @@ const ImageWithFallback: React.FC<Props> = ({ srcBase, alt, width, className,nav
       onClick={()=> navigate(navLink)}
       className={className}
       onError={() => setSrc(`${srcBase}.png`)}
+      style={{cursor:"pointer"}}
     />
   );
 };

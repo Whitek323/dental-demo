@@ -1,4 +1,8 @@
-
+* {
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 /* Base class */
 .shield-layer {
     position: absolute;
@@ -8,14 +12,6 @@
     animation: pulse 1s infinite;
 }
 
-/* Base class */
-.shield-layer {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    display: none;
-    animation: pulse 1s infinite;
-}
 
 /* ชั้นในสุด: เกราะ 1 */
 #shield1 {

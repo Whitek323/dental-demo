@@ -11,7 +11,7 @@ class MenuPage extends Component {
         <Navbar/>
         <div className="" style={{backgroundColor:"#34323641",height:"100vh",paddingTop:"100px"}}>
           <div className="d-flex flex-wrap py-3 justify-content-center overflow-auto" style={{maxHeight:"80vh"}}>
-            <img onClick={()=> window.location.href = "/game/bacteriadefender"} className="game-card" src="game_menu/1.jpg"/>  
+            <img onClick={()=> window.location.href = "/bacteriadefender"} className="game-card" src="game_menu/1.jpg"/>  
             <img className="game-card" src="game_menu/2.png"/>  
             <img className="game-card" src="game_menu/3.png"/>  
             <img className="game-card" src="game_menu/4.png"/>  

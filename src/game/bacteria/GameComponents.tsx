@@ -43,10 +43,10 @@ export const HUD: React.FC<{
 </div>
 <div className="fixed-bottom d-flex flex-row w-mw-100 justify-content-center" style={{marginBottom:"100px"}}>
 
-  <div className='text-center bg-dark rounded me-2 p-1 text-white' >
+  {/* <div className='text-center bg-dark rounded me-2 p-1 text-white' >
   แปรงฟันบนด้านขวา {phase + 1}/6
-  </div>
-  <div className='bg-secondary rounded p-1 text-white'>
+  </div> */}
+  <div className='bg-secondary fs-1 rounded p-1 text-white'>
    {formatTime(brushingTime)} 
   </div>
 {/* Stack: {stack} */}
