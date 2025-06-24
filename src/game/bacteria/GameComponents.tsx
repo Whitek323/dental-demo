@@ -1,6 +1,6 @@
 // GameComponents.tsx
 import React from 'react';
-
+import MenuIcon from '@mui/icons-material/Menu';
 export const ShieldLayers: React.FC<{ stack: number }> = ({ stack }) => {
   return (
     <>
@@ -16,15 +16,6 @@ export const ShieldLayers: React.FC<{ stack: number }> = ({ stack }) => {
   );
 };
 
-export const ToothImage: React.FC<{ src: string }> = ({ src }) => (
-  <img
-    id="upper_tooth"
-    src={src}
-    alt="tooth"
-    style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-  />
-);
-
 export const HUD: React.FC<{
   totalTime: number;
   brushingTime: number;
@@ -33,56 +24,66 @@ export const HUD: React.FC<{
   stack: number;
 }> = ({ totalTime, brushingTime, phase, score, stack }) => (
   <>
-<div className="fixed-top top-0 d-flex justify-content-center align-items-center gap-3 mt-5" style={{ zIndex: 99 }}>
-  <div id="hud" className="bg-info fs-3 text-dark rounded text-center ms-3 px-3 py-1" style={{ width: '250px' }}>
-    {formatTime(totalTime)}
-  </div>
-  <div id="lowerhud" className="bg-warning fs-3 fw-bold fst-italic text-dark rounded text-center px-3 py-1 me-3"  style={{width:"250px"}}>
-    {score}PT
-  </div>
-</div>
-<div className="fixed-bottom d-flex flex-row w-mw-100 justify-content-center" style={{marginBottom:"100px"}}>
+    <nav className="navbar fixed-top text-white my-0 py-2" style={{ backgroundColor: "#2f064f" }}>
+      <div className="container-fluid d-flex align-content-between justify-content-between">
+        <div className="d-flex align-items-center">
+          <div className="me-1 px-2 fs-3 rounded-3" style={{background:"#4c00c7"}}>
+          <MenuIcon />
+          </div>
+          <div id="hud" className='rounded-3 fs-3 text-dark px-4 align-items-center me-1' style={{ backgroundColor: "#00bdda" }}>
+            {formatTime(totalTime)}
+          </div>
+        </div>
+        <div id="lowerhud" className='rounded-3 text-dark fst-italic px-4 fs-3 fw-bold px-1 d-flex align-items-center' style={{ backgroundColor: "#e1dd04" }}>
+          {score}PT
+        </div>
+      </div>
+    </nav>
+    <div className="fixed-bottom d-flex flex-row w-mw-100 justify-content-center" style={{ marginBottom: "100px" }}>
 
-  {/* <div className='text-center bg-dark rounded me-2 p-1 text-white' >
-  แปรงฟันบนด้านขวา {phase + 1}/6
-  </div> */}
-  <div className='bg-secondary fs-1 rounded p-1 text-white'>
-   {formatTime(brushingTime)} 
-  </div>
-{/* Stack: {stack} */}
-</div>
+      {/* Stack: {stack} */}
+    </div>
   </>
 );
 
 export const Controls: React.FC<{
+  running: boolean;
   paused: boolean;
   stack: number;
   onStart: () => void;
+  brushingTime: number;
   onPauseToggle: () => void;
   onStackChange: (v: number) => void;
-}> = ({ paused, stack, onStart, onPauseToggle, onStackChange }) => (
+}> = ({ running, paused, stack, onStart, brushingTime, onPauseToggle, onStackChange }) => (
+  <div className="fixed-bottom py-2 bg-dark bottom-0 d-flex justify-content-center align-items-center gap-3 mt-5" style={{ zIndex: 9 }}>
 
-<div className="fixed-bottom bottom-0 d-flex justify-content-center align-items-center gap-3 mt-5" style={{ zIndex: 99 }}>
-<button 
-  style={{ display: HUD.totalTime === 0 ? "none" : "block" }} 
-  className="btn btn-primary z-3"
-  onClick={onStart}
->
-  เริ่ม
-</button>
-    <button className='btn btn-danger' onClick={onPauseToggle}>{paused ? 'Resume' : 'Pause'}</button>
+    {!running && (
+      <button className="btn btn-primary px-4 text-center z-3" onClick={onStart}>
+        เริ่ม
+      </button>
+    )}
+    <div className='btn btn-secondary rounded px-4 text-white'>
+      {formatTime(brushingTime)}
+    </div>
+    {running && (
+      <button className="btn btn-danger px-4 text-center" onClick={onPauseToggle}>
+        {paused ? 'Resume' : 'Pause'}
+      </button>
+    )}
     {/* <input
-      type="number"
-      // className='form-control'
-      min={0}
-      max={3}
-      value={stack}
-      onChange={(e) => onStackChange(Math.max(0, Math.min(3, parseInt(e.target.value))))}
-      style={{ width: '60px' }}
-      aria-label="ตั้งค่าเกราะ"
-    /> */}
-    
+  type="number"
+  // className='form-control'
+  min={0}
+  max={3}
+  value={stack}
+  onChange={(e) => onStackChange(Math.max(0, Math.min(3, parseInt(e.target.value))))}
+  style={{ width: '60px' }}
+  aria-label="ตั้งค่าเกราะ"
+/> */}
   </div>
+
+
+
 );
 
 export const EndScreen: React.FC<{

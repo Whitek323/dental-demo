@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import user_example from '../../constant';
 import './App.css';
 import {
   ShieldLayers,
   HUD,
   Controls,
-  EndScreen
+  EndScreen,
+  ToothImage
 } from './GameComponents';
 import DetectWithAI from './DetectWithAI';
+import Navbar from '../../layout/Navbar';
 
 const MAX_TIME = 120;
 const PHASE_DURATION = 20;
@@ -46,12 +49,27 @@ const BacteriaDefender: React.FC = () => {
   const [end, setEnd] = useState(false);
   const [rating, setRating] = useState('');
   const [showShield, setShowShield] = useState(false);
+  const [toothSrc, setToothSrc] = useState('');
+
 
   const gameInterval = useRef<number | null>(null);
   const animationRef = useRef<number>();
   const bacteriaList = useRef<Bacteria[]>([]);
   const currentStack = useRef<number>(0);
   const spawnCounter = useRef<number>(0);
+  useEffect(() => {
+  const phaseImage = `${phase + 1}.png`;
+  const altImage = phase < 3 ? 'upper-normal.png' : 'lower-normal.png';
+  let showMain = true;
+
+  const interval = setInterval(() => {
+    setToothSrc(showMain ? `game/tooth/${phaseImage}` : `game/tooth/${altImage}`);
+    showMain = !showMain;
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, [phase]);
+
   useEffect(() => {
     currentStack.current = stack;
   }, [stack]);
@@ -149,14 +167,22 @@ const BacteriaDefender: React.FC = () => {
         for (const landmarks of results.multiFaceLandmarks) {
           const nose = landmarks[1];
           const canvasEl = canvasRef.current!;
-          const gameRect = gameRef.current!.getBoundingClientRect();
-          const canvasOffset = canvasEl.getBoundingClientRect();
+          const canvasRect = canvasEl.getBoundingClientRect();
 
-          const x = nose.x * canvasEl.width + (canvasOffset.left - gameRect.left);
-          const y = nose.y * canvasEl.height + (canvasOffset.top - gameRect.top);
+          const x = nose.x * canvasRect.width + canvasRect.left;
+          const y = nose.y * canvasRect.height + canvasRect.top;
 
+          // const canvasOffset = canvasEl.getBoundingClientRect();
 
-          const size = 300;
+          // const x = nose.x * canvasEl.width + (canvasOffset.left - gameRect.left);
+          // const y = nose.y * canvasEl.height + (canvasOffset.top - gameRect.top);
+
+          const left = landmarks[234];
+          const right = landmarks[454]; 
+
+          const faceWidthPx = Math.abs(right.x - left.x) * canvas.width;
+          const size = faceWidthPx * 3; 
+          // const size = 300;
           if (shieldRef.current) {
             shieldRef.current.style.left = `${x - size / 2}px`;
             shieldRef.current.style.top = `${y - size / 2}px`;
@@ -195,7 +221,7 @@ const BacteriaDefender: React.FC = () => {
     const el = document.createElement('img');
     el.onload = () => gameRef.current!.appendChild(el); // ปลอดภัยกว่า
 
-    const enemies = [`theme/default/enemy/${phase + 1}.png`];
+    const enemies = [`theme/${user_example.theme}/enemy/${phase + 1}.png`];
     // if (phase === 5) enemies.push('game/bacteria/boss6.png');
     el.src = enemies[Math.floor(Math.random() * enemies.length)];
     el.className = 'bacteria';
@@ -226,7 +252,6 @@ const BacteriaDefender: React.FC = () => {
 
   const startGame = () => { 
     if (running) return;
-    console.log("UIIA UIIA I")
     setRunning(true); 
     setPaused(false); 
   };
@@ -253,22 +278,38 @@ const BacteriaDefender: React.FC = () => {
 
   return (
     <div>
-      <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center vh-100 align-items-center">
+      <Navbar/>
+      <div id="game" ref={gameRef} className="d-flex flex-column justify-content-center vh-100 align-items-center position-relative" style={{ position: 'relative'}}>
         <video ref={videoRef} className="position-absolute d-none" autoPlay muted playsInline />
-        <canvas ref={canvasRef} width={480} height={480} className="position-absolute m-auto rounded-4" style={{ zIndex: 1 }} />
+        <canvas ref={canvasRef} className="m-auto rounded-4" style={{ zIndex: 1,width:"80vh",height:"90vh"}} />
         <div ref={shieldRef} className="shield-layer position-absolute rounded-circle" style={{ display: showShield ? 'block' : 'none', zIndex: 2 }} />
         <div ref={faceRef} className="position-absolute" style={{ width: 1, height: 1, zIndex: 0 }} />
-
         <DetectWithAI videoElement={videoRef.current} onTrigger={setShowShield} />
+        
+        <div
+          className="position-fixed"
+          style={{ bottom: '6rem', right: '2.8rem', zIndex: 10 }}
+        >
+          <img style={{background:"#162283",zIndex:10}}
+            id="tooth"
+            src={toothSrc}
+            alt="tooth"
+            className='rounded-5'
+            
+            />
+        </div>
         <HUD totalTime={totalTime} brushingTime={brushingTime} phase={phase} score={score} stack={stack} />
         {end && <EndScreen score={score} totalTime={totalTime} rating={rating} onRestart={restartGame} />}
         <Controls
+          running={running}
           paused={paused}
           stack={stack}
           onStart={startGame}
+          brushingTime={brushingTime}
           onPauseToggle={togglePause}
-          onStackChange={setStack} 
+          onStackChange={setStack}
         />
+
       </div>
     </div>
   );
